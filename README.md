@@ -9,20 +9,21 @@ Flask Login example using flask-login, flask_sqlalchemy and flask.
 ---
 
 ### Pip install
-*pip install flask flask-login flask-sqlalchemy<br />
+*pip install flask flask-login flask-sqlalchemy*<br />
 
 ---
 
 ### Antes de executar código
-*Alterar o arquivo mysqldb.py, inserindo as credenciais e configurações adequadas<br />
--   `mysql = {
+*Alterar o arquivo mysqldb.py, inserindo as credenciais e configurações adequadas*<br />
+```json
+mysql = {
         'user': 'usuario',
         'pw': 'senha',
         'db': 'nome-do-banco',
         'host': 'localhost',
         'port': '3306'
-    }`
-
+}
+```
 ---
 
 ### Executar o código
