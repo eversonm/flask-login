@@ -53,8 +53,16 @@ def authenticate(username, password):
 def create_tables():
     db.create_all()
 
-@app.route('/')
+@app.route('/', methods=["GET", "POST"])
 def do_login():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        user = authenticate(username, password)
+        if user:
+            return redirect(url_for('home'))
+        else:
+            return abort(401)
     return render_template("login.html")
 
 @login_required
@@ -107,13 +115,14 @@ def login():
         else:
             return abort(401)
     else:
-        return Response('''
+        return render_template('lgn.html')
+"""        return Response('''
             <form action="" method="post">
                 <p><input type=text name=username>
                 <p><input type=password name=password>
                 <p><input type=submit value=Login>
             </form>
-        ''')
+        ''')"""
 
 @app.route('/register' , methods = ['GET' , 'POST'])
 def register():
@@ -132,13 +141,14 @@ def register():
         <a href="/login">Faça Login Aqui</a>
         ''')
     else:
-        return Response('''
-            <form action="" method="post">
-            <p><input type=text name=username placeholder="Enter username">
-            <p><input type=password name=password placeholder="Enter password">
-            <p><input type=submit value=Register>
-            </form>
-        ''')
+        return render_template('register.html')
+        """return Response('''
+                                    <form action="" method="post">
+                                    <p><input type=text name=username placeholder="Enter username">
+                                    <p><input type=password name=password placeholder="Enter password">
+                                    <p><input type=submit value=Register>
+                                    </form>
+                                ''')"""
 
 # handle login failed
 @app.errorhandler(401)
